@@ -1,0 +1,9 @@
+$header-height: 60px;
+$header-bg: #2c3133;
+
+header {
+    width: 100%;
+    height: $header-height;
+    background-color: $header-bg;
+    box-shadow: 0px 3px 3px rgba(32, 32, 32, 0.6);
+}
