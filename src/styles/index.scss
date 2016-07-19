@@ -1,0 +1,11 @@
+@import "common.scss";
+@import "partial/header.scss";
+
+#wrap {
+    min-height: 100%;
+    min-width: 1000px;
+}
+#container {
+}
+
+@import "partial/footer.scss";

@@ -1,0 +1,8 @@
+$footer-height: 40px;
+$footer-bg: #2c3133;
+
+footer {
+    height: $footer-height;
+    background-color: $footer-bg;
+    margin-top: -$footer-height;
+}

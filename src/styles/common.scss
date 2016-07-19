@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+html,body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    font-family: "MicrosoftYaHei", "微软雅黑";
+    font-size: 16px;
+}
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.btn {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    padding: 0px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.positive-btn {
+    background-color: #3b6491;
+    color: #fff;
+    &:hover {
+        background-color: #3e6fa5;
+    }
+}

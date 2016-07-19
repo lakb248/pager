@@ -1,0 +1,20 @@
+$header-height: 60px;
+$header-bg: #2a2b2e;
+
+header {
+    width: 100%;
+    height: $header-height;
+    background-color: $header-bg;
+    box-shadow: 0px 3px 3px rgba(32, 32, 32, 0.6);
+}
+#logo {
+    float: left;
+    width: 120px;
+    height: $header-height;
+    background-color: #3b6491;
+}
+#save-btn {
+    float: right;
+    margin: 10px;
+    margin-right: 30px;
+}
