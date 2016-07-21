@@ -2,10 +2,23 @@
 @import "partial/header.scss";
 
 #wrap {
-    min-height: 100%;
-    min-width: 1000px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    overflow: hidden;
 }
-#container {
+#container, #content {
+    position: absolute;
+    top: $header-height;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+#content {
+    top: 0px;
 }
 
 @import "partial/footer.scss";

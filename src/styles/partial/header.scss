@@ -2,10 +2,14 @@ $header-height: 60px;
 $header-bg: #2a2b2e;
 
 header {
+    position: absolute;
+    left: 0px;
+    top: 0px;
     width: 100%;
     height: $header-height;
     background-color: $header-bg;
-    box-shadow: 0px 3px 3px rgba(32, 32, 32, 0.6);
+    box-shadow: 0px 3px 3px 0px rgba(32, 32, 32, 0.6);
+    z-index: 2;
 }
 #logo {
     float: left;
