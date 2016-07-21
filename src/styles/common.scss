@@ -1,37 +1,49 @@
 * {
     box-sizing: border-box;
 }
-html,body {
-    height: 100%;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-}
+
+html,
 body {
-    font-family: "MicrosoftYaHei", "微软雅黑";
+    width: 100%;
+    height: 100;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'MicrosoftYaHei', '微软雅黑';
     font-size: 16px;
 }
+
 ul {
-    margin: 0px;
-    padding: 0px;
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
+
 $btn-height: 40px;
+
 .btn {
     width: 100px;
     height: $btn-height;
+    padding: 0;
+    font-size: 18px;
     line-height: $btn-height;
     text-align: center;
-    font-size: 18px;
-    padding: 0px;
-    border: none;
-    outline: none;
     cursor: pointer;
+    border: 0;
+    outline: none;
 }
+
+$white: #fff;
+$positive-color: #3b6491;
+$positive-hover-color: #3e6fa5;
+
 .positive-btn {
-    background-color: #3b6491;
-    color: #fff;
+    color: $white;
+    background-color: $positive-color;
+
     &:hover {
-        background-color: #3e6fa5;
+        background-color: $positive-hover-color;
     }
 }

@@ -1,24 +1,27 @@
-@import "common.scss";
-@import "partial/header.scss";
+@import 'common';
+@import 'partial/header';
 
 #wrap {
     position: absolute;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     overflow: hidden;
-}
-#container, #content {
-    position: absolute;
-    top: $header-height;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    overflow: hidden;
-}
-#content {
-    top: 0px;
 }
 
-@import "partial/footer.scss";
+#container,
+#content {
+    position: absolute;
+    top: $header-height;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+#content {
+    top: 0;
+}
+
+@import 'partial/footer';

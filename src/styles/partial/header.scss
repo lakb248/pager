@@ -1,22 +1,26 @@
 $header-height: 60px;
 $header-bg: #2a2b2e;
+$header-shadow: rgba(32, 32, 32, .6);
 
 header {
     position: absolute;
-    left: 0px;
-    top: 0px;
+    top: 0;
+    left: 0;
+    z-index: 2;
     width: 100%;
     height: $header-height;
     background-color: $header-bg;
-    box-shadow: 0px 3px 3px 0px rgba(32, 32, 32, 0.6);
-    z-index: 2;
+    box-shadow: 0 3px 3px 0 $header-shadow;
 }
+$logo-background: #3b6491;
+
 #logo {
     float: left;
     width: 120px;
     height: $header-height;
-    background-color: #3b6491;
+    background-color: $logo-background;
 }
+
 #save-btn {
     float: right;
     margin: 10px;
