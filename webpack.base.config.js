@@ -25,12 +25,8 @@ module.exports = {
             loader: 'vue'
         }, {
             test: /\.scss$/,
-<<<<<<< HEAD
 
             loader: ExtractTextPlugin.extract({notExtractLoader: 'style', loader: 'css!sass'}),
-=======
-            loader: ExtractTextPlugin.extract('style', 'css!sass'),
->>>>>>> 8a25ed476d0eeeee17d9b045aa8a5b72f8ec2107
             exclude: /node_modules/
         }, {
             test: /\.(png|jpg)$/,

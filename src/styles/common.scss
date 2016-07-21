@@ -16,10 +16,11 @@ ul {
     padding: 0px;
     list-style: none;
 }
+$btn-height: 40px;
 .btn {
     width: 100px;
-    height: 40px;
-    line-height: 40px;
+    height: $btn-height;
+    line-height: $btn-height;
     text-align: center;
     font-size: 18px;
     padding: 0px;
