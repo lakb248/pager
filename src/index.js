@@ -11,7 +11,7 @@ Vue.use(VueResource);
 var router = new VueRouter();
 
 var Pager = Vue.extend({
-    data() {
+    data () {
         return {};
     }
 });
