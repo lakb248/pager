@@ -5,13 +5,13 @@
 html,
 body {
     width: 100%;
-    height: 100;
+    height: 100%;
     padding: 0;
     margin: 0;
 }
 
 body {
-    font-family: 'MicrosoftYaHei', '微软雅黑';
+    font-family: 'Lantinghei SC', 'MicrosoftYaHei', '微软雅黑';
     font-size: 16px;
 }
 
@@ -27,6 +27,7 @@ $btn-height: 40px;
     width: 100px;
     height: $btn-height;
     padding: 0;
+    font-family: 'Lantinghei SC', 'MicrosoftYaHei', '微软雅黑';
     font-size: 18px;
     line-height: $btn-height;
     text-align: center;
