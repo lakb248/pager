@@ -10,7 +10,7 @@ module.exports = {
         vendor: ['vue', 'vue-resource', 'vue-router']
     },
     output: {
-        path: require('path').resolve('build') + '/',
+        path: path.resolve('build') + '/',
         publicPath: '/build/',
         filename: 'build.js',
         chunkFilename: '[hash].[name].js'
@@ -26,7 +26,8 @@ module.exports = {
         }, {
             test: /\.scss$/,
 
-            loader: ExtractTextPlugin.extract({notExtractLoader: 'style', loader: 'css!sass'}),
+            loader: ExtractTextPlugin.extract(
+                {notExtractLoader: 'style', loader: 'css!sass'}),
             exclude: /node_modules/
         }, {
             test: /\.(png|jpg)$/,
@@ -34,7 +35,8 @@ module.exports = {
         }]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.bundle.js'}),
+        new webpack.optimize.CommonsChunkPlugin(
+            {name: 'vendor', filename: 'vendor.bundle.js'}),
         new ExtractTextPlugin('index.css')
     ]
 };

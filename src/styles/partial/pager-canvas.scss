@@ -1,0 +1,72 @@
+$size-ticks-background: #1e1f22;
+$size-ticks-number-color: #6a7a89;
+$size-ticks-number-height: 10px;
+
+.size-ticks {
+    position: fixed;
+    background-color: $size-ticks-background;
+}
+
+.horizontal-size-ticks {
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 90;
+    height: 22px;
+    background-image: url('../asserts/ruler_ticks.png');
+    background-repeat: repeat-x;
+    background-position-y: 5px;
+
+    .size-ticks-number-container {
+        top: 12px;
+        right: 0;
+        left: 0;
+        height: $size-ticks-number-height;
+        line-height: $size-ticks-number-height;
+    }
+
+    .size-ticks-number {
+        float: left;
+        width: 100px;
+        height: $size-ticks-number-height;
+        padding-left: 3px;
+    }
+}
+
+.vertical-size-ticks {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 89;
+    width: 22px;
+    background-image: url('../asserts/ruler_ticks_vertical.png');
+    background-repeat: repeat-y;
+    background-position-x: 5px;
+
+    .size-ticks-number-container {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: $size-ticks-number-height;
+    }
+
+    .size-ticks-number {
+        width: 0;
+        height: 100px;
+        padding-top: 3px;
+        margin-right: 4px;
+        font-size: 8px;
+        text-align: right;
+        word-break: break-all;
+    }
+}
+
+.size-ticks-number-container {
+    position: absolute;
+    overflow: hidden;
+}
+
+.size-ticks-number {
+    font-size: 8px;
+    color: $size-ticks-number-color;
+}

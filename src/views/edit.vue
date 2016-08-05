@@ -1,103 +1,160 @@
 <template>
     <div id="content">
-        <aside class="sidebar" id="left-sidebar">
-
-        </aside>
-        <section id="edit-desk" v-bind:style="{'right': sidebarWidth + 'px'}">
-
-        </section>
-        <aside class="sidebar" id="right-sidebar" v-bind:style="{'width': sidebarWidth + 'px'}">
-            <div class="resize-sidebar" v-on:mousedown="enableResize">
-                <span>|</span>
+        <aside class="sidebar" id="tool-sidebar" v-bind:style="{'width': sidebarWidth['left'] + 'px'}">
+            <div class="sidebar-header" v-on:click="switchSidebar('left')">
+                <span class="sidebar-arrow"
+                    v-bind:class="{'sidebar-arrow-right': isSidebarHide['left'], 'sidebar-arrow-left': !isSidebarHide['left']}"></span>
             </div>
+            <div class="sidebar-body">
+                <div class="sidebar-content">
+                    <ul id="basic-components-list">
+                        <li id="text-component"></li>
+                        <li id="image-component"></li>
+                        <li id="link-component"></li>
+                    </ul>
+                </div>
+                <div class="sidebar-nav">
+                    <ul>
+                        <li class="selected">基本控件</li>
+                        <li>自定义控件</li>
+                        <li>更多</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <section id="edit-area" v-bind:style="{'right': sidebarWidth['right'] + 'px', 'left': sidebarWidth['left'] + 'px'}">
+            <div class="size-ticks horizontal-size-ticks">
+                <div class="size-ticks-number-container">
+                    <div class="size-ticks-number"> </div>
+                    <div class="size-ticks-number">0</div>
+                    <div class="size-ticks-number">100</div>
+                    <div class="size-ticks-number">200</div>
+                    <div class="size-ticks-number">300</div>
+                    <div class="size-ticks-number">400</div>
+                    <div class="size-ticks-number">500</div>
+                    <div class="size-ticks-number">600</div>
+                    <div class="size-ticks-number">700</div>
+                    <div class="size-ticks-number">800</div>
+                </div>
+            </div>
+            <div class="size-ticks vertical-size-ticks">
+                <div class="size-ticks-number-container">
+                    <div class="size-ticks-number"></div>
+                    <div class="size-ticks-number">0</div>
+                    <div class="size-ticks-number">100</div>
+                    <div class="size-ticks-number">200</div>
+                    <div class="size-ticks-number">300</div>
+                    <div class="size-ticks-number">400</div>
+                    <div class="size-ticks-number">500</div>
+                    <div class="size-ticks-number">600</div>
+                    <div class="size-ticks-number">700</div>
+                    <div class="size-ticks-number">800</div>
+                </div>
+            </div>
+            <page :pager="pager" :on-element-click="onElementClick"></page>
+        </section>
+        <aside class="sidebar" id="setting-sidebar" v-bind:style="{'width': sidebarWidth['right'] + 'px'}">
+            <div class="sidebar-header" v-on:click="switchSidebar('right')">
+                <span class="sidebar-arrow"
+                    v-bind:class="{'sidebar-arrow-left': isSidebarHide['right'], 'sidebar-arrow-right': !isSidebarHide['right']}"></span>
+            </div>
+            <setting-sidebar :component="activeComponent" :on-change="onPropertyChange"></setting-sidebar>
         </aside>
     </div>
 </template>
 <script>
-    let resizeEnable = false;
-    const sidebarInitWidth = 250;
+    import Page from '../components/page.vue';
+    import SettingSidebar from '../components/setting-sidebar.vue';
+    const sidebarInitWidth = 200;
+
+    // let setObjValueByKey = (object, key, value) => {
+    //     var keys = key.split('.');
+    //     var changedObject = null;
+    //     for (let i = 0, l = keys.length; i < l; i++) {
+    //         if (changedObject == null) {
+    //             changedObject = object[keys[i]];
+    //         } else {
+    //             changedObject = changedObject[keys[i]];
+    //         }
+    //         console.log(changedObject);
+    //     }
+    //     if (changedObject != null) {
+    //         changedObject = value;
+    //     }
+    //     console.log(changedObject);
+    //     // object.style.width = value;
+    //     // console.log(object);
+    // };
+
     export default {
-        data () {
+        data() {
             return {
-                sidebarWidth: sidebarInitWidth
+                sidebarWidth: {
+                    left: sidebarInitWidth,
+                    right: sidebarInitWidth
+                },
+                isSidebarHide: {
+                    left: false,
+                    right: false
+                },
+                pager: {
+                    style: {
+                        width: 1280,
+                        height: 1000,
+                        backgroundColor: '#ddd'
+                    }
+                },
+                activeComponent: {
+                    style: {}
+                }
             };
         },
-        methods: {
-            enableResize (event) {
-                resizeEnable = true;
-                document.body.style.cursor = 'col-resize';
-            }
+        components: {
+            page: Page,
+            'setting-sidebar': SettingSidebar
         },
-        ready() {
-            var _this = this;
-            var startPosition;
-            document.body.addEventListener('mousemove', function (e) {
-                if (resizeEnable) {
-                    if (startPosition != undefined) {
-                        var currentPosition = e.clientX;
-                        var currentWidth = startPosition - currentPosition + sidebarInitWidth;
-                        if (currentWidth <= 400 && currentWidth >= 200) {
-                            _this.sidebarWidth = currentWidth;
-                        }
-                    } else {
-                        startPosition = e.clientX;
-                    }
+        methods: {
+            switchSidebar(which) {
+                this.isSidebarHide[which] = !this.isSidebarHide[which];
+                if (this.isSidebarHide[which]) {
+                    this.sidebarWidth[which] = 40;
+                } else {
+                    this.sidebarWidth[which] = sidebarInitWidth;
                 }
-            });
-            document.body.addEventListener('mouseup', function (e) {
-                resizeEnable = false;
-                document.body.style.cursor = 'default';
-            });
+            },
+            onElementClick(element) {
+                this.activeComponent = element;
+            },
+            onPropertyChange(keypath, newValue) {
+                this.$set('activeComponent.' + keypath, newValue);
+            }
         }
-    }
+    };
 </script>
 <style lang="sass">
-    $sidebar-width: 250px;
-    .sidebar {
+    @import "../styles/partial/sidebar";
+    @import "../styles/partial/tool-sidebar";
+    @import "../styles/partial/pager-canvas";
+    $setting-sidebar-width: 200px;
+
+    #edit-area {
         position: absolute;
         top: 0px;
         bottom: 0px;
-        width: $sidebar-width;
-        background-color: #2a2b2e;
-        z-index: 1;
-        &:hover .resize-sidebar {
-            display: block;
-        }
-    }
-    .resize-sidebar {
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
-        left: 0px;
-        text-align: center;
-        width: 5px;
-        background: #313235;
-        cursor: col-resize;
-        display: none;
-        span {
-            position: absolute;
-            top: 50%;
-            left: 0px;
-            width: 100%;
-            height: 20px;
-            margin-top: -10px;
-            line-height: 20px;
-            color: #5a5858;
-            text-align: center;
-        }
-    }
-    #left-sidebar {
-        left: 0px;
-    }
-    #right-sidebar {
-        right: 0px;
-    }
-    #edit-desk {
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
-        left: $sidebar-width;
-        right: $sidebar-width;
+        left: $tool-sidebar-width;
+        right: $setting-sidebar-width;
         background-color: #17181b;
+        /* for size-ticks fixed position */
+        transform: translateZ(0);
+        overflow: auto;
+    }
+
+    #setting-sidebar {
+        right: 0;
+        width: $setting-sidebar-width;
+
+        .sidebar-arrow {
+            left: 15px;
+        }
     }
 </style>

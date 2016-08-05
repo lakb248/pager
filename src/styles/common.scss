@@ -21,6 +21,15 @@ ul {
     list-style: none;
 }
 
+$input-color: #2f2f2f;
+
+input {
+    height: 20px;
+    background-color: $input-color;
+    border: 0;
+    outline: none;
+}
+
 $btn-height: 40px;
 
 .btn {

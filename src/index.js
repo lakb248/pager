@@ -11,7 +11,7 @@ Vue.use(VueResource);
 var router = new VueRouter();
 
 var Pager = Vue.extend({
-    data () {
+    data() {
         return {};
     }
 });
@@ -23,7 +23,7 @@ router.map({
     },
     '/edit/:pagerId': {
         name: 'edit',
-        component: (resolve) => {
+        component: resolve => {
             require(['./views/edit.vue'], resolve);
         }
     }
@@ -32,4 +32,5 @@ router.redirect({
     '*': '/list'
 });
 
+/* global document */
 router.start(Pager, document.body);
