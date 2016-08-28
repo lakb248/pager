@@ -32,9 +32,9 @@ export default {
 <style lang="sass">
     .page-container {
         position: absolute;
-        top: 100px;
-        left: 100px;
-        width: 640px;
+        top: 0px;
+        left: 0px;
+        width: 100%;
         height: 1280px;
         background-color: #fff;
         cursor: move;
