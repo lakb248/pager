@@ -1,36 +1,43 @@
-<template lang="html">
-    <div>
+<template>
+    <dragable>
         <section class="setting-section">
             <div class="setting-header open">样式</div>
             <div class="setting-content">
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label>宽:</label>
-                        <input type="number" v-model="activeComponent.style.width" v-on:input="onSettingChange('style.width')">
+                        <input type="number" v-bind:value="activeComponent.style.width" v-on:input="onSettingChange($event, 'style.width')">
                     </div>
                     <div class="setting-item col-1">
                         <label>高:</label>
-                        <input type="number" v-bind:value="activeComponent.style.height" v-on:input="onSettingChange('style.height')">
+                        <input type="number" v-bind:value="activeComponent.style.height" v-on:input="onSettingChange($event, 'style.height')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label>上:</label>
-                        <input type="number" v-bind:value="activeComponent.style.top" v-on:input="onSettingChange('style.top')">
+                        <input type="number" v-bind:value="activeComponent.style.top" v-on:input="onSettingChange($event, 'style.top')">
                     </div>
                     <div class="setting-item col-1">
                         <label>下:</label>
-                        <input type="number" v-bind:value="activeComponent.style.bottom" v-on:input="onSettingChange('style.bottom')">
+                        <input type="number" v-bind:value="activeComponent.style.bottom" v-on:input="onSettingChange($event, 'style.bottom')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label>左:</label>
-                        <input type="number" v-bind:value="activeComponent.style.left" v-on:input="onSettingChange('style.left')">
+                        <input type="number" v-bind:value="activeComponent.style.left" v-on:input="onSettingChange($event, 'style.left')">
                     </div>
                     <div class="setting-item col-1">
                         <label>右:</label>
-                        <input type="number" v-bind:value="activeComponent.style.right" v-on:input="onSettingChange('style.right')">
+                        <input type="number" v-bind:value="activeComponent.style.right" v-on:input="onSettingChange($event, 'style.right')">
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-item col-2">
+                        <label>背景:</label>
+                        <input type="color" v-bind:value="activeComponent.style.backgroundColor" v-on:input="onSettingChange($event, 'style.backgroundColor')">
+                        <i id="background-img-icon"></i>
                     </div>
                 </div>
             </div>
@@ -43,23 +50,40 @@
             <div class="setting-header close">动画</div>
             <div class="setting-content"></div>
         </section>
-    </div>
+    </dragable>
 </template>
 <script>
-    let getObjValueByKey = (object, key) => {
+    import DragContainer from './drag-container.vue';
+    // let getObjValueByKey = (object, key) => {
+    //     var keys = key.split('.');
+    //     var newValue = null;
+    //     for (let i = 0, l = keys.length; i < l; i++) {
+    //         if (newValue == null) {
+    //             newValue = object[keys[i]];
+    //         } else {
+    //             newValue = newValue[keys[i]];
+    //         }
+    //     }
+    //     return newValue;
+    // };
+    let setObjValueByKey = (object, key, value) => {
         var keys = key.split('.');
         var newValue = null;
         for (let i = 0, l = keys.length; i < l; i++) {
             if (newValue == null) {
                 newValue = object[keys[i]];
+            } else if (i === l - 1) {
+                newValue[keys[i]] = value;
             } else {
                 newValue = newValue[keys[i]];
             }
         }
-        return newValue;
     };
     export default {
         props: ['component', 'onChange'],
+        components: {
+            dragable: DragContainer
+        },
         computed: {
             // prevent two-way data binding
             activeComponent: {
@@ -69,8 +93,10 @@
             }
         },
         methods: {
-            onSettingChange(type, value) {
-                var newValue = getObjValueByKey(this.activeComponent, type);
+            onSettingChange(e, type) {
+                var newValue = e.target.value;
+                setObjValueByKey(this.activeComponent, type, newValue);
+                // var newValue = getObjValueByKey(this.activeComponent, type);
                 this.onChange(type, newValue);
             }
         }
@@ -151,7 +177,7 @@
     .setting-item {
         label {
             display: inline-block;
-            width: 20px;
+            min-width: 20px;
             height: 20px;
             font-size: 13px;
             line-height: 20px;
@@ -162,10 +188,24 @@
             color: $setting-header-color;
             text-align: center;
         }
+
+        input[type="color"] {
+            width: 90px;
+        }
     }
 
     .col-1 {
         float: left;
         width: 50%;
+    }
+
+    #background-img-icon {
+        float: right;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        background: url('../asserts/image-icon.png') no-repeat center center;
+        background-size: 20px 20px;
+        cursor: pointer;
     }
 </style>
