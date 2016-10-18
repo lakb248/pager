@@ -34,6 +34,11 @@ module.exports = {
             loader: 'url-loader?limit=8192'
         }]
     },
+    resolve: {
+        alias: {
+            'vue': 'vue/dist/vue.js'
+        }
+    },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin(
             {name: 'vendor', filename: 'vendor.bundle.js'}),

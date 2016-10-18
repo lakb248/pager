@@ -8,29 +8,31 @@ import PagerList from './views/pager-list.vue';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-var router = new VueRouter();
+var router = new VueRouter({
+    routes: [{
+        path: '/list',
+        name: 'list',
+        component: PagerList
+    }, {
+        path: '/edit/:pagerId',
+        name: 'edit',
+        component: resolve => {
+            require(['./views/edit.vue'], resolve);
+        }
+    }, {
+        path: '*',
+        redirect: {
+            path: '/list'
+        }
+    }]
+});
 
-var Pager = Vue.extend({
+var Pager = new Vue({
+    router: router,
     data() {
         return {};
     }
 });
 
-router.map({
-    '/list': {
-        name: 'list',
-        component: PagerList
-    },
-    '/edit/:pagerId': {
-        name: 'edit',
-        component: resolve => {
-            require(['./views/edit.vue'], resolve);
-        }
-    }
-});
-router.redirect({
-    '*': '/list'
-});
-
 /* global document */
-router.start(Pager, document.body);
+Pager.$mount('#container');

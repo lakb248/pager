@@ -1,7 +1,10 @@
 <template>
     <div id="content">
         <ul class="pager-list">
-            <li class="pager-list-item" v-on:click="edit(pager.pagerId)" v-link="{ path: '/edit/' + pager.pagerId}" v-for="pager in pagerList"></li>
+            <router-link v-for="pager in pagerList"
+                        tag="li"
+                        class="pager-list-item"
+                        :to="{name: 'edit', params: {'pagerId': pager.pagerId}}"/>
         </ul>
     </div>
 </template>

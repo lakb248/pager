@@ -8,15 +8,28 @@
         <link rel="stylesheet" href="/build/index.css">
     </head>
     <body>
-        <header>
-            <div id="logo"></div>
-            <ul id="header-menu">
-                <li></li>
-            </ul>
-            <button id="save-btn" class="btn positive-btn">保存</button>
-        </header>
-        <div id="wrap">
-            <router-view></router-view>
+        <div id="container">
+            <header>
+                <div id="logo"></div>
+                <ul id="header-menu">
+                    <li>
+                        <div class="menu-title">Site</div>
+                        <ul class="menu-slide-down"></ul>
+                    </li>
+                    <li>
+                        <div class="menu-title">View</div>
+                        <ul class="menu-slide-down"></ul>
+                    </li>
+                    <li>
+                        <div class="menu-title">Help</div>
+                        <ul class="menu-slide-down"></ul>
+                    </li>
+                </ul>
+                <button id="save-btn" class="btn positive-btn">Save</button>
+            </header>
+            <div id="wrap">
+                <router-view></router-view>
+            </div>
         </div>
         <script type="text/javascript" src="/build/vendor.bundle.js"></script>
         <script type="text/javascript" src="/build/build.js"></script>
