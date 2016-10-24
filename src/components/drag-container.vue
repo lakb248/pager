@@ -1,6 +1,9 @@
 <template>
-    <div class="dragable-container">
-        <div class="dragable-header" v-on:mousedown="startDrag($event)" v-on:mousemove="drag($event)" v-on:mouseup="endDrag()"></div>
+    <div class="dragable-container" v-bind:style="{'transform': 'translateX(' + translate.x + 'px) translateY(' +translate.y + 'px)'}">
+        <div class="dragable-header" v-on:mousedown="startDrag($event)" v-on:mouseup="endDrag()">
+            <i class="dragable-icon"></i>
+            <i class="close-icon" v-on:click="onCloseClick()"></i>
+        </div>
         <slot></slot>
     </div>
 </template>
@@ -11,9 +14,14 @@
         y: 0
     };
     export default {
+        props: ['onDrag', 'onClose'],
         data() {
             return {
-                isDragable: false
+                isDragable: false,
+                translate: {
+                    x: 0,
+                    y: 0
+                }
             };
         },
         methods: {
@@ -24,24 +32,34 @@
             },
             drag(event) {
                 if (this.isDragable) {
-                    var element = this.$el;
                     var offsetX = event.clientX - startPosition.x;
                     var offsetY = event.clientY - startPosition.y;
                     startPosition.x = event.clientX;
                     startPosition.y = event.clientY;
-                    element.style.left = element.offsetLeft + offsetX + 'px';
-                    element.style.top = element.offsetTop + offsetY + 'px';
+                    this.translate.x += offsetX;
+                    this.translate.y += offsetY;
                 }
             },
             endDrag() {
                 this.isDragable = false;
+            },
+            onCloseClick() {
+                if (this.onClose) {
+                    this.onClose();
+                }
             }
+        },
+        mounted() {
+            document.addEventListener('mousemove', (e) => {
+                this.drag(e);
+            });
         }
     };
 </script>
 
 <style lang="sass">
     $basic-color: #212225;
+    $icon-height: 24px;
     .dragable-container {
         position: absolute;
         border-radius: 2px;
@@ -52,9 +70,23 @@
     .dragable-header {
         width: 100%;
         height: 30px;
-        background: url(../asserts/dragable-icon.png) no-repeat 10px center;
-        background-size: 24px 24px;
         background-color: $basic-color;
         cursor: move;
+        i {
+            width: $icon-height;
+            height: $icon-height;
+            background-size: $icon-height $icon-height;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+    }
+    .dragable-icon {
+        float: left;
+        background-image: url(../asserts/dragable-icon.png);
+    }
+    .close-icon {
+        float: right;
+        background-image: url(../asserts/close-icon.png);
+        cursor: pointer;
     }
 </style>
