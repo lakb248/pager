@@ -11,7 +11,7 @@ body {
 }
 
 body {
-    font-family: 'Lantinghei SC', 'MicrosoftYaHei', '微软雅黑';
+    font-family: '微软雅黑', 'MicrosoftYahei', 'STHeiti', arial, sans-serif;
     font-size: 16px;
 }
 
@@ -36,7 +36,7 @@ $btn-height: 40px;
     width: 100px;
     height: $btn-height;
     padding: 0;
-    font-family: 'Lantinghei SC', 'MicrosoftYaHei', '微软雅黑';
+    font-family: '微软雅黑', 'MicrosoftYahei', 'STHeiti', arial, sans-serif;
     font-size: 18px;
     line-height: $btn-height;
     text-align: center;
@@ -49,7 +49,7 @@ $white: #fff;
 $positive-color: #3b6491;
 $positive-hover-color: #3e6fa5;
 
-.positive-btn {
+.btn--positive {
     color: $white;
     background-color: $positive-color;
 

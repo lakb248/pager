@@ -1,7 +1,7 @@
 <template>
-    <dragable>
+    <dragable style="left:20px;top:20px;">
         <div class="toolbar-body">
-            <div class="toolbar-content">
+            <div class="toolbar-content" v-on:click="onToolClick($event)">
                 <ul id="basic-components-list">
                     <li id="text-component"></li>
                     <li id="image-component"></li>
@@ -15,8 +15,22 @@
 <script>
 import Dragable from './drag-container.vue';
 export default {
+    // props: {
+    //     onToolbarClick: {
+    //         type: Function
+    //     }
+    // },
+    props: ['onToolbarClick'],
     components: {
         dragable: Dragable
+    },
+    methods: {
+        onToolClick(e) {
+            var target = e.target;
+            var id = target.id;
+            var type = id.split('-')[0];
+            this.onToolbarClick(type);
+        }
     }
 };
 </script>

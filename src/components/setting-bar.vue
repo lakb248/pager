@@ -1,53 +1,53 @@
 <template>
-    <dragable>
+    <dragable style="right:20px;top:20px;">
         <section class="setting-section">
-            <div class="setting-header open">样式</div>
+            <div class="setting-header setting-header--open">样式</div>
             <div class="setting-content">
                 <div class="setting-row">
                     <div class="setting-item col-1">
-                        <label>宽:</label>
-                        <input type="number" v-bind:value="activeComponent.style.width" v-on:input="onSettingChange($event, 'style.width')">
+                        <label class="setting-item__label">宽:</label>
+                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.width" v-on:input="onSettingChange($event, 'style.width')">
                     </div>
                     <div class="setting-item col-1">
-                        <label>高:</label>
-                        <input type="number" v-bind:value="activeComponent.style.height" v-on:input="onSettingChange($event, 'style.height')">
-                    </div>
-                </div>
-                <div class="setting-row">
-                    <div class="setting-item col-1">
-                        <label>上:</label>
-                        <input type="number" v-bind:value="activeComponent.style.top" v-on:input="onSettingChange($event, 'style.top')">
-                    </div>
-                    <div class="setting-item col-1">
-                        <label>下:</label>
-                        <input type="number" v-bind:value="activeComponent.style.bottom" v-on:input="onSettingChange($event, 'style.bottom')">
+                        <label class="setting-item__label">高:</label>
+                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.height" v-on:input="onSettingChange($event, 'style.height')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-1">
-                        <label>左:</label>
-                        <input type="number" v-bind:value="activeComponent.style.left" v-on:input="onSettingChange($event, 'style.left')">
+                        <label class="setting-item__label">上:</label>
+                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.top" v-on:input="onSettingChange($event, 'style.top')">
                     </div>
                     <div class="setting-item col-1">
-                        <label>右:</label>
-                        <input type="number" v-bind:value="activeComponent.style.right" v-on:input="onSettingChange($event, 'style.right')">
+                        <label class="setting-item__label">下:</label>
+                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.bottom" v-on:input="onSettingChange($event, 'style.bottom')">
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-item col-1">
+                        <label class="setting-item__label">左:</label>
+                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.left" v-on:input="onSettingChange($event, 'style.left')">
+                    </div>
+                    <div class="setting-item col-1">
+                        <label class="setting-item__label">右:</label>
+                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.right" v-on:input="onSettingChange($event, 'style.right')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-2">
-                        <label>背景:</label>
-                        <input type="color" v-bind:value="activeComponent.style.backgroundColor" v-on:input="onSettingChange($event, 'style.backgroundColor')">
+                        <label class="setting-item__label">背景:</label>
+                        <input class="setting-item__input" type="color" v-bind:value="activeComponent.style.backgroundColor" v-on:input="onSettingChange($event, 'style.backgroundColor')">
                         <i id="background-img-icon"></i>
                     </div>
                 </div>
             </div>
         </section>
         <section class="setting-section">
-            <div class="setting-header close">属性</div>
+            <div class="setting-header setting-header--close">属性</div>
             <div class="setting-content"></div>
         </section>
         <section class="setting-section">
-            <div class="setting-header close">动画</div>
+            <div class="setting-header setting-header--close">动画</div>
             <div class="setting-content"></div>
         </section>
     </dragable>
@@ -88,6 +88,7 @@
             // prevent two-way data binding
             activeComponent: {
                 get() {
+                    console.log(JSON.parse(JSON.stringify(this.component)));
                     return JSON.parse(JSON.stringify(this.component));
                 }
             }
@@ -138,7 +139,7 @@
             content: '';
         }
 
-        &.close {
+        &--close {
             background-color: $setting-header-background;
 
             &::after {
@@ -147,7 +148,7 @@
             }
         }
 
-        &.open {
+        &--open {
             color: $setting-header-color-open;
             background-color: $setting-background;
 
@@ -175,23 +176,23 @@
     }
 
     .setting-item {
-        label {
-            display: inline-block;
-            min-width: 20px;
-            height: 20px;
-            font-size: 13px;
-            line-height: 20px;
-        }
-
-        input {
-            width: 50px;
-            color: $setting-header-color;
-            text-align: center;
-        }
-
         input[type="color"] {
-            width: 90px;
+            width: 80px;
         }
+    }
+
+    .setting-item__label {
+        display: inline-block;
+        min-width: 20px;
+        height: 20px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .setting-item__input {
+        width: 50px;
+        color: $setting-header-color;
+        text-align: center;
     }
 
     .col-1 {

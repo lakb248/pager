@@ -12,9 +12,37 @@ header {
     background-color: $header-bg;
     box-shadow: 0 3px 3px 0 $header-shadow;
 }
+
+$menu-color: #5b5c5f;
+$menu-hover-color: #fff;
+
+.header-menu {
+    position: relative;
+    float: left;
+    height: $header-height;
+    margin-left: 40px;
+}
+
+.header-menu__item {
+    float: left;
+    padding: 0 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header-menu__title {
+    height: $header-height;
+    min-width: 40px;
+    line-height: $header-height;
+    color: $menu-color;
+
+    &:hover {
+        color: $menu-hover-color;
+    }
+}
 $logo-background: #3b6491;
 
-#logo {
+.header-logo {
     float: left;
     width: 120px;
     height: $header-height;
