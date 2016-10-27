@@ -6,31 +6,31 @@
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label class="setting-item__label">宽:</label>
-                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.width" v-on:input="onSettingChange($event, 'style.width')">
+                        <number-input class="setting-item__input" :number="activeComponent.style.width" v-bind:change="settingChangeCb('style.width')">
                     </div>
                     <div class="setting-item col-1">
                         <label class="setting-item__label">高:</label>
-                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.height" v-on:input="onSettingChange($event, 'style.height')">
+                        <number-input class="setting-item__input" :number="activeComponent.style.height" v-bind:change="settingChangeCb('style.height')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label class="setting-item__label">上:</label>
-                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.top" v-on:input="onSettingChange($event, 'style.top')">
+                        <number-input class="setting-item__input" :number="activeComponent.style.top" v-bind:change="settingChangeCb('style.top')">
                     </div>
                     <div class="setting-item col-1">
                         <label class="setting-item__label">下:</label>
-                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.bottom" v-on:input="onSettingChange($event, 'style.bottom')">
+                        <number-input class="setting-item__input" :number="activeComponent.style.bottom" v-bind:change="settingChangeCb('style.bottom')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label class="setting-item__label">左:</label>
-                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.left" v-on:input="onSettingChange($event, 'style.left')">
+                        <number-input class="setting-item__input" :number="activeComponent.style.left" v-bind:change="settingChangeCb('style.left')">
                     </div>
                     <div class="setting-item col-1">
                         <label class="setting-item__label">右:</label>
-                        <input class="setting-item__input" type="number" v-bind:value="activeComponent.style.right" v-on:input="onSettingChange($event, 'style.right')">
+                        <number-input class="setting-item__input" :number="activeComponent.style.right" v-bind:change="settingChangeCb('style.right')">
                     </div>
                 </div>
                 <div class="setting-row">
@@ -54,6 +54,7 @@
 </template>
 <script>
     import DragContainer from './drag-container.vue';
+    import NumberInput from './number-input.vue';
     // let getObjValueByKey = (object, key) => {
     //     var keys = key.split('.');
     //     var newValue = null;
@@ -66,39 +67,29 @@
     //     }
     //     return newValue;
     // };
-    let setObjValueByKey = (object, key, value) => {
-        var keys = key.split('.');
-        var newValue = null;
-        for (let i = 0, l = keys.length; i < l; i++) {
-            if (newValue == null) {
-                newValue = object[keys[i]];
-            } else if (i === l - 1) {
-                newValue[keys[i]] = value;
-            } else {
-                newValue = newValue[keys[i]];
-            }
-        }
-    };
+
     export default {
         props: ['component', 'onChange'],
         components: {
-            dragable: DragContainer
+            dragable: DragContainer,
+            'number-input': NumberInput
         },
         computed: {
             // prevent two-way data binding
             activeComponent: {
                 get() {
-                    console.log(JSON.parse(JSON.stringify(this.component)));
                     return JSON.parse(JSON.stringify(this.component));
                 }
             }
         },
         methods: {
-            onSettingChange(e, type) {
-                var newValue = e.target.value;
-                setObjValueByKey(this.activeComponent, type, newValue);
-                // var newValue = getObjValueByKey(this.activeComponent, type);
-                this.onChange(type, newValue);
+            settingChangeCb(type) {
+                return (newValue) => {
+                    this.onChange(type, newValue);
+                };
+            },
+            onSettingChange(newValue, type) {
+
             }
         }
     };
@@ -121,7 +112,7 @@
         position: relative;
         width: 100%;
         height: $setting-header-height;
-        padding: 0 20px;
+        padding: 0 10px;
         font-size: 14px;
         line-height: $setting-header-height;
         color: $setting-header-color;
@@ -166,7 +157,7 @@
 
     .setting-content {
         display: none;
-        padding: 10px 20px;
+        padding: 10px;
         background-color: $setting-background;
     }
 
@@ -198,6 +189,7 @@
     .col-1 {
         float: left;
         width: 50%;
+        padding-right: 5px;
     }
 
     #background-img-icon {

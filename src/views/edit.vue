@@ -31,8 +31,8 @@
             </div> -->
 
             <page :pager="pager" :on-element-click="onElementClick"></page>
-            <setting-bar v-bind:style="{'left': '50px','top': '50px'}"></setting-bar>
-            <toolbar></toolbar>
+            <setting-bar :component="activeComponent" :on-change="onPropertyChange"></setting-bar>
+            <toolbar :on-toolbar-click="onToolbarClick"></toolbar>
         </section>
     </div>
 </template>
@@ -40,20 +40,34 @@
     import Page from '../components/page.vue';
     import Settingbar from '../components/setting-bar.vue';
     import Toolbar from '../components/toolbar.vue';
+    import Util from '../util/util.js';
+
+    let setObjValueByKey = (object, key, value) => {
+        var keys = key.split('.');
+        var newValue = null;
+        for (let i = 0, l = keys.length; i < l; i++) {
+            if (newValue == null) {
+                newValue = object[keys[i]];
+            } else if (i === l - 1) {
+                newValue[keys[i]] = value;
+            } else {
+                newValue = newValue[keys[i]];
+            }
+        }
+    };
 
     export default {
         data() {
             return {
-                isSidebarHide: {
-                    left: false,
-                    right: false
-                },
                 pager: {
                     style: {
                         width: 1280,
                         height: 1000,
+                        top: 0,
+                        left: 0,
                         backgroundColor: '#dddddd'
-                    }
+                    },
+                    components: []
                 },
                 activeComponent: {
                     style: {}
@@ -67,11 +81,14 @@
         },
         methods: {
             onElementClick(element) {
+                console.log(element);
                 this.activeComponent = element;
             },
             onPropertyChange(keypath, newValue) {
-                console.info(keypath, newValue);
-                this.$set('activeComponent.' + keypath, newValue);
+                setObjValueByKey(this.activeComponent, keypath, newValue);
+            },
+            onToolbarClick(type) {
+                this.pager.components.push(Util.createComonent());
             }
         }
     };

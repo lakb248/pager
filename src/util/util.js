@@ -41,7 +41,20 @@ let getStyleFromComponent = component => {
     return resultStyle;
 };
 
+let createComonent = type => {
+    var component = {};
+    var style = {};
+    style.width = 100;
+    style.height = 100;
+    style.left = 120;
+    style.top = 150;
+    style.backgroundColor = '#000000';
+    component.style = style;
+    return component;
+};
+
 module.exports = {
     hasObjectChange,
-    getStyleFromComponent
+    getStyleFromComponent,
+    createComonent
 };

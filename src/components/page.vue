@@ -1,16 +1,19 @@
 <template lang="html">
-    <div class="page-container" v-bind:style="style" v-on:click="onPageClick(pager)">
-        <pager-component v-for="component in pager.components" v-bind:component="component"></pager-component>
+    <div class="page-container" v-bind:style="style" v-on:click="onComponentSelect(pager)">
+        <pager-component v-for="component in pager.components" v-bind:component="component" v-bind:select="onComponentSelect"></pager-component>
+        <pager-controller></pager-controller>
     </div>
 </template>
 <script>
 import PagerComponent from './pager-component.vue';
+import PagerController from './pager-controller.vue';
 import Util from '../util/util.js';
 
 export default {
     props: ['pager', 'onElementClick'],
     components: {
-        'pager-component': PagerComponent
+        'pager-component': PagerComponent,
+        'pager-controller': PagerController
     },
     data() {
         return {};
@@ -23,8 +26,9 @@ export default {
         }
     },
     methods: {
-        onPageClick(data) {
-            this.onElementClick(data);
+        onComponentSelect(component) {
+            console.log('on page click');
+            this.onElementClick(component);
         }
     }
 };
