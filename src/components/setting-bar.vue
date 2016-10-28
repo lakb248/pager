@@ -1,5 +1,5 @@
 <template>
-    <dragable style="right:20px;top:20px;">
+    <dragable style="right:20px;top:20px;z-index:9999;">
         <section class="setting-section">
             <div class="setting-header setting-header--open">样式</div>
             <div class="setting-content">
@@ -19,18 +19,8 @@
                         <number-input class="setting-item__input" :number="activeComponent.style.top" v-bind:change="settingChangeCb('style.top')">
                     </div>
                     <div class="setting-item col-1">
-                        <label class="setting-item__label">下:</label>
-                        <number-input class="setting-item__input" :number="activeComponent.style.bottom" v-bind:change="settingChangeCb('style.bottom')">
-                    </div>
-                </div>
-                <div class="setting-row">
-                    <div class="setting-item col-1">
                         <label class="setting-item__label">左:</label>
                         <number-input class="setting-item__input" :number="activeComponent.style.left" v-bind:change="settingChangeCb('style.left')">
-                    </div>
-                    <div class="setting-item col-1">
-                        <label class="setting-item__label">右:</label>
-                        <number-input class="setting-item__input" :number="activeComponent.style.right" v-bind:change="settingChangeCb('style.right')">
                     </div>
                 </div>
                 <div class="setting-row">
