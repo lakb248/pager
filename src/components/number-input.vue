@@ -49,7 +49,7 @@ export default {
     methods: {
         onInput(e) {
             var value = e.target.value;
-            event.target.value = this.value;
+            e.target.value = this.value;
             value = Number(value);
             if (isNaN(value)) {
                 return;
