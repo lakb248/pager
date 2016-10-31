@@ -62,7 +62,7 @@
     $icon-height: 24px;
     .dragable-container {
         position: absolute;
-        border-radius: 2px;
+        border-radius: 5px;
         padding: 5px;
         background-color: $basic-color;
         box-shadow: 0 3px 3px 0 rgba(32, 32, 32, 0.6);
