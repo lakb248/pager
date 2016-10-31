@@ -59,7 +59,7 @@
     // };
 
     export default {
-        props: ['component', 'onChange'],
+        props: ['component'],
         components: {
             dragable: DragContainer,
             'number-input': NumberInput
@@ -74,12 +74,12 @@
         },
         methods: {
             settingChangeCb(type) {
-                return (newValue) => {
-                    this.onChange(type, newValue);
+                return (value) => {
+                    this.$emit('property-change', type, value);
                 };
             },
-            onSettingChange(newValue, type) {
-
+            onSettingChange(value, type) {
+                this.$emit('property-change', type, value);
             }
         }
     };

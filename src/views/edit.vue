@@ -30,9 +30,9 @@
                 </div>
             </div> -->
 
-            <page :pager="pager" :on-element-click="onElementClick"></page>
-            <setting-bar :component="activeComponent" :on-change="onPropertyChange"></setting-bar>
-            <toolbar :on-toolbar-click="onToolbarClick"></toolbar>
+            <page :pager="pager" :active-component="activeComponent" :on-element-click="onElementClick"></page>
+            <setting-bar :component="activeComponent" v-on:property-change="onPropertyChange"></setting-bar>
+            <toolbar v-on:create-component="onComponentCreate"></toolbar>
         </section>
     </div>
 </template>
@@ -61,11 +61,11 @@
             return {
                 pager: {
                     style: {
-                        width: 1280,
+                        width: '100%',
                         height: 1000,
                         top: 0,
                         left: 0,
-                        backgroundColor: '#dddddd'
+                        backgroundColor: '#ffffff'
                     },
                     components: []
                 },
@@ -81,15 +81,24 @@
         },
         methods: {
             onElementClick(element) {
-                console.log(element);
                 this.activeComponent = element;
             },
-            onPropertyChange(keypath, newValue) {
-                setObjValueByKey(this.activeComponent, keypath, newValue);
+            onPropertyChange(keypath, value) {
+                setObjValueByKey(this.activeComponent, keypath, value);
             },
-            onToolbarClick(type) {
-                this.pager.components.push(Util.createComonent());
+            onComponentCreate(type) {
+                var element = Util.createComonent();
+                this.pager.components.push(element);
+                this.activeComponent = element;
             }
+        },
+        mounted() {
+            this.$on('property-change', () => {
+                console.log('property-change');
+            });
+            this.$on('create-component', () => {
+                console.log('create-component');
+            });
         }
     };
 </script>

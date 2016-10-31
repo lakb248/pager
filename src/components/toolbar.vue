@@ -1,5 +1,5 @@
 <template>
-    <dragable style="left:20px;top:20px;">
+    <dragable style="left:20px;top:20px;z-index: 9999;">
         <div class="toolbar-body">
             <div class="toolbar-content" v-on:click="onToolClick($event)">
                 <ul id="basic-components-list">
@@ -20,7 +20,6 @@ export default {
     //         type: Function
     //     }
     // },
-    props: ['onToolbarClick'],
     components: {
         dragable: Dragable
     },
@@ -29,7 +28,7 @@ export default {
             var target = e.target;
             var id = target.id;
             var type = id.split('-')[0];
-            this.onToolbarClick(type);
+            this.$emit('create-component', type);
         }
     }
 };
