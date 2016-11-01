@@ -50,7 +50,7 @@
             }
         },
         mounted() {
-            document.addEventListener('mousemove', (e) => {
+            document.addEventListener('mousemove', e => {
                 this.drag(e);
             });
         }

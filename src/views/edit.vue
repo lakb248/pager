@@ -30,7 +30,13 @@
                 </div>
             </div> -->
 
-            <page :pager="pager" :active-component="activeComponent" :on-element-click="onElementClick"></page>
+            <page :pager="pager" :active-component="activeComponent"
+                :on-element-click="onElementClick"
+                v-on:property-change="onPropertyChange"
+                ></page>
+            <div class="pager-controllers">
+                <pager-controller :component="activeComponent"  v-on:property-change="onPropertyChange"></pager-controller>
+            </div>
             <setting-bar :component="activeComponent" v-on:property-change="onPropertyChange"></setting-bar>
             <toolbar v-on:create-component="onComponentCreate"></toolbar>
         </section>
@@ -38,6 +44,7 @@
 </template>
 <script>
     import Page from '../components/page.vue';
+    import PagerController from '../components/pager-controller.vue';
     import Settingbar from '../components/setting-bar.vue';
     import Toolbar from '../components/toolbar.vue';
     import Util from '../util/util.js';
@@ -77,7 +84,8 @@
         components: {
             page: Page,
             'setting-bar': Settingbar,
-            toolbar: Toolbar
+            toolbar: Toolbar,
+            'pager-controller': PagerController
         },
         methods: {
             onElementClick(element) {
@@ -91,14 +99,6 @@
                 this.pager.components.push(element);
                 this.activeComponent = element;
             }
-        },
-        mounted() {
-            this.$on('property-change', () => {
-                console.log('property-change');
-            });
-            this.$on('create-component', () => {
-                console.log('create-component');
-            });
         }
     };
 </script>
@@ -115,5 +115,11 @@
         /* for size-ticks fixed position */
         transform: translateZ(0);
         overflow: auto;
+    }
+    .pager-controllers {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 3;
     }
 </style>

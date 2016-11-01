@@ -28,16 +28,18 @@ const styles = [
     'left'
 ];
 
-let getStyleFromComponent = component => {
+let getStyleFromComponent = (component, type) => {
     let resultStyle = {};
     let componentStyle = component.style;
-    Object.keys(componentStyle).forEach(key => {
-        if (styles.indexOf(key) !== -1) {
-            resultStyle[key] = componentStyle[key] + 'px';
-        } else {
-            resultStyle[key] = componentStyle[key];
-        }
-    });
+    if (componentStyle) {
+        Object.keys(componentStyle).forEach(key => {
+            if (styles.indexOf(key) !== -1) {
+                resultStyle[key] = componentStyle[key] + 'px';
+            } else if (!type || type === 'component') {
+                resultStyle[key] = componentStyle[key];
+            }
+        });
+    }
     return resultStyle;
 };
 
