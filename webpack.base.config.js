@@ -12,8 +12,8 @@ module.exports = {
     output: {
         path: path.resolve('build') + '/',
         publicPath: '/build/',
-        filename: 'build.js',
-        chunkFilename: '[hash].[name].js'
+        filename: '[name].js',
+        chunkFilename: '[chunkhash].[name].js'
     },
     module: {
         loaders: [{
@@ -25,7 +25,6 @@ module.exports = {
             loader: 'vue'
         }, {
             test: /\.scss$/,
-
             loader: ExtractTextPlugin.extract(
                 {notExtractLoader: 'style', loader: 'css!sass'}),
             exclude: /node_modules/
@@ -40,8 +39,6 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin(
-            {name: 'vendor', filename: 'vendor.bundle.js'}),
         new ExtractTextPlugin('index.css')
     ]
 };
