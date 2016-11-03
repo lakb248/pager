@@ -15,11 +15,6 @@
 <script>
 import Dragable from './drag-container.vue';
 export default {
-    // props: {
-    //     onToolbarClick: {
-    //         type: Function
-    //     }
-    // },
     components: {
         dragable: Dragable
     },

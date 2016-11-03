@@ -14,3 +14,9 @@ test/coverage
 
 # project doc #
 doc/
+
+# build directory #
+build/
+
+# code coverage directory #
+coverage/
