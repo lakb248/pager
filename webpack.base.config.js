@@ -16,7 +16,7 @@ module.exports = {
         chunkFilename: '[chunkhash].[name].js'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
             loader: 'babel',
             exclude: /node_modules/
