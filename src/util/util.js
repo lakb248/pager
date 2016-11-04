@@ -5,8 +5,11 @@
  * @return {Boolean} if the object has changed
  */
 let hasObjectChange = (before, after) => {
-    if ((before === undefined && before) || (before && after === undefined)) {
+    if ((before === undefined && after) || (before && after === undefined)) {
         return true;
+    }
+    if (before === after) {
+        return false;
     }
     var keys = Object.keys(after);
     for (let i = 0, l = keys.length; i < l; i++) {
@@ -15,6 +18,8 @@ let hasObjectChange = (before, after) => {
             return hasObjectChange(before[key], after[key]);
         } else if (after[key] !== before[key]) {
             return true;
+        } else {
+            return false;
         }
     }
 };

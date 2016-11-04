@@ -4,7 +4,7 @@
   "description": "a web design tool implement by vue",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --watch --progress --config webpack.dev.config.js --port 8788",
+    "dev": "webpack-dev-server --inline --watch --progress --config webpack.dev.config.js --port 8788",
     "build": "rimraf build/ && webpack --progress --colors --config webpack.prod.config.js",
     "test": "karma start karma.config.js"
   },
