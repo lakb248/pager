@@ -1,67 +1,84 @@
 <template>
     <div class="pager-controller" v-bind:style="style"
-        v-on:mousedown="startDrag($event)"
-        v-on:mouseup="endDrag()">
-        <div class="controller controller--nw"></div>
-        <div class="controller controller--w"></div>
-        <div class="controller controller--sw"></div>
-        <div class="controller controller--s"></div>
-        <div class="controller controller--se"></div>
-        <div class="controller controller--e"></div>
-        <div class="controller controller--ne"></div>
-        <div class="controller controller--n"></div>
+        v-dragable="drag">
+        <div class="controller controller--nw" v-dragable="resize('nw')"></div>
+        <div class="controller controller--w" v-dragable="resize('w')"></div>
+        <div class="controller controller--sw" v-dragable="resize('sw')"></div>
+        <div class="controller controller--s" v-dragable="resize('s')"></div>
+        <div class="controller controller--se" v-dragable="resize('se')"></div>
+        <div class="controller controller--e" v-dragable="resize('e')"></div>
+        <div class="controller controller--ne" v-dragable="resize('ne')"></div>
+        <div class="controller controller--n" v-dragable="resize('n')"></div>
     </div>
 </template>
 
 <script>
     import Util from '../util/util.js';
+    const EVENT = 'property-change';
     export default {
         props: ['component'],
         computed: {
             style() {
                 return Util.getStyleFromComponent(this.component, 'controller');
             },
-            activeComponent() {
-                return this.component;
-            },
             left() {
                 return this.component.style.left || 0;
             },
             top() {
                 return this.component.style.top || 0;
+            },
+            width() {
+                return this.component.style.width || 0;
+            },
+            height() {
+                return this.component.style.height || 0;
             }
-        },
-        data() {
-            return {
-                isDragable: false,
-                mouseX: 0,
-                mouseY: 0
-            };
         },
         methods: {
-            startDrag(event) {
-                this.isDragable = true;
-                this.mouseX = event.clientX;
-                this.mouseY = event.clientY;
+            drag(offsetX, offsetY) {
+                this.$emit(EVENT, 'style.top', this.top + offsetY);
+                this.$emit(EVENT, 'style.left', this.left + offsetX);
             },
-            drag(event) {
-                if (this.isDragable) {
-                    var offsetX = event.clientX - this.mouseX;
-                    var offsetY = event.clientY - this.mouseY;
-                    this.mouseX = event.clientX;
-                    this.mouseY = event.clientY;
-                    this.$emit('property-change', 'style.top', this.top + offsetY);
-                    this.$emit('property-change', 'style.left', this.left + offsetX);
-                }
-            },
-            endDrag() {
-                this.isDragable = false;
+            resize(direction) {
+                return (offsetX, offsetY) => {
+                    switch(direction) {
+                        case 'nw':
+                            this.$emit(EVENT, 'style.height', this.height - offsetY);
+                            this.$emit(EVENT, 'style.top', this.top + offsetY);
+                            this.$emit(EVENT, 'style.width', this.width - offsetX);
+                            this.$emit(EVENT, 'style.left', this.left + offsetX);
+                            break;
+                        case 'w':
+                            this.$emit(EVENT, 'style.width', this.width - offsetX);
+                            this.$emit(EVENT, 'style.left', this.left + offsetX);
+                            break;
+                        case 'sw':
+                            this.$emit(EVENT, 'style.height', this.height + offsetY);
+                            this.$emit(EVENT, 'style.width', this.width - offsetX);
+                            this.$emit(EVENT, 'style.left', this.left + offsetX);
+                            break;
+                        case 's':
+                            this.$emit(EVENT, 'style.height', this.height + offsetY);
+                            break;
+                        case 'se':
+                            this.$emit(EVENT, 'style.height', this.height + offsetY);
+                            this.$emit(EVENT, 'style.width', this.width + offsetX);
+                            break;
+                        case 'e':
+                            this.$emit(EVENT, 'style.width', this.width + offsetX);
+                            break;
+                        case 'ne':
+                            this.$emit(EVENT, 'style.height', this.height - offsetY);
+                            this.$emit(EVENT, 'style.top', this.top + offsetY);
+                            this.$emit(EVENT, 'style.width', this.width + offsetX);
+                            break;
+                        case 'n':
+                            this.$emit(EVENT, 'style.height', this.height - offsetY);
+                            this.$emit(EVENT, 'style.top', this.top + offsetY);
+                            break;
+                    }
+                };
             }
-        },
-        mounted() {
-            document.addEventListener('mousemove', e => {
-                this.drag(e);
-            });
         }
     };
 </script>
