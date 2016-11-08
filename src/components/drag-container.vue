@@ -1,6 +1,6 @@
 <template>
-    <div class="dragable-container" v-bind:style="{'transform': 'translateX(' + translate.x + 'px) translateY(' +translate.y + 'px)'}">
-        <div class="dragable-header" v-on:mousedown="startDrag($event)" v-on:mouseup="endDrag()">
+    <div class="dragable-container" v-dragable="drag" v-bind:style="{'transform': 'translateX(' + translate.x + 'px) translateY(' +translate.y + 'px)'}">
+        <div class="dragable-header">
             <i class="dragable-icon"></i>
             <i class="close-icon" v-on:click="onCloseClick()"></i>
         </div>
@@ -9,15 +9,10 @@
 </template>
 
 <script>
-    var startPosition = {
-        x: 0,
-        y: 0
-    };
     export default {
         props: ['onDrag', 'onClose'],
         data() {
             return {
-                isDragable: false,
                 translate: {
                     x: 0,
                     y: 0
@@ -25,34 +20,15 @@
             };
         },
         methods: {
-            startDrag(event) {
-                this.isDragable = true;
-                startPosition.x = event.clientX;
-                startPosition.y = event.clientY;
-            },
-            drag(event) {
-                if (this.isDragable) {
-                    var offsetX = event.clientX - startPosition.x;
-                    var offsetY = event.clientY - startPosition.y;
-                    startPosition.x = event.clientX;
-                    startPosition.y = event.clientY;
-                    this.translate.x += offsetX;
-                    this.translate.y += offsetY;
-                }
-            },
-            endDrag() {
-                this.isDragable = false;
+            drag(offsetX, offsetY) {
+                this.translate.x += offsetX;
+                this.translate.y += offsetY;
             },
             onCloseClick() {
                 if (this.onClose) {
                     this.onClose();
                 }
             }
-        },
-        mounted() {
-            document.addEventListener('mousemove', e => {
-                this.drag(e);
-            });
         }
     };
 </script>
