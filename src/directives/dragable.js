@@ -1,7 +1,6 @@
 
 export default {
     bind(el, binding, vnode) {
-        console.log(el);
         binding.dragable = false;
         binding.mouseX = 0;
         binding.mouseY = 0;

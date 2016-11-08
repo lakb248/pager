@@ -4,9 +4,12 @@ import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 
 import PagerList from './views/pager-list.vue';
+import DragableDirective from './directives/dragable.js';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+
+Vue.directive('dragable', DragableDirective);
 
 var router = new VueRouter({
     routes: [{

@@ -7,7 +7,7 @@
 <script>
     import Util from '../util/util.js';
     export default {
-        props: ['component', 'select'],
+        props: ['component'],
         computed: {
             style: {
                 get() {
@@ -17,9 +17,7 @@
         },
         methods: {
             onComponentClick(e) {
-                if (this.select && typeof this.select === 'function') {
-                    this.select(this.component);
-                }
+                this.$emit('select', this.component);
                 e.stopPropagation();
             }
         }

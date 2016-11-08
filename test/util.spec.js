@@ -19,7 +19,7 @@ describe('util.js:getStyleFromComponent', () => {
                 }
             };
             var style = Util.getStyleFromComponent(component, 'controller');
-            expect(style.backgroundColor).toBe(undefined);
+            expect(style.backgroundColor).toBeUndefined();
         });
     it('should include all styles if type is undefined or component', () => {
         var component = {
@@ -41,24 +41,24 @@ describe('util.js:getStyleFromComponent', () => {
 describe('util.js:hasObjectChange', () => {
     it('should return true if one of the arguments is undefined', () => {
         var hasObjectChange = Util.hasObjectChange(undefined, {});
-        expect(hasObjectChange).toBe(true);
+        expect(hasObjectChange).toBeTruthy();
     });
     it('should return false if pass the same object', () => {
         var obj = {a: 1};
         var hasObjectChange = Util.hasObjectChange(obj, obj);
-        expect(hasObjectChange).toBe(false);
+        expect(hasObjectChange).toBeFalsy();
     });
     it('should return false if pass different objects, but have the same value', () => {
         var hasObjectChange = Util.hasObjectChange({a: 1}, {a: 1});
-        expect(hasObjectChange).toBe(false);
+        expect(hasObjectChange).toBeFalsy();
     });
     it('should return true if pass different objects and have different value', () => {
         var hasObjectChange = Util.hasObjectChange({a: 1}, {a: 2});
-        expect(hasObjectChange).toBe(true);
+        expect(hasObjectChange).toBeTruthy();
     });
     it('should recur compare the argument if the arguments have object inside', () => {
         var hasObjectChange = Util.hasObjectChange({a: {b: 3}}, {a: {b: 3}});
-        expect(hasObjectChange).toBe(false);
+        expect(hasObjectChange).toBeFalsy();
     });
 });
 describe('util.js:createComonent',() => {
@@ -73,6 +73,6 @@ describe('util.js:createComonent',() => {
             }
         };
         var hasChange = Util.hasObjectChange(component, Util.createComonent());
-        expect(hasChange).toBe(false);
+        expect(hasChange).toBeFalsy();
     });
 });

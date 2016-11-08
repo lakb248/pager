@@ -16,8 +16,6 @@ webpackConfig.plugins = (baseConfig.plugins || []).concat([
         }
     })
 ]);
-// exclude in preloader will cover the exclude in loader of webpack.base.js
-// so I have to repeat again here
 webpackConfig.module.rules = (webpackConfig.module.rules || []).concat([{
     enforce: 'pre',
     test: /\.js?$/,

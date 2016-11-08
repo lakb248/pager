@@ -30,12 +30,9 @@
                 </div>
             </div> -->
 
-            <page :pager="pager" :active-component="activeComponent"
-                :on-element-click="onElementClick"
-                v-on:property-change="onPropertyChange"
-                ></page>
+            <page :pager="pager" v-on:select="onElementClick"></page>
             <div class="pager-controllers">
-                <pager-controller :component="activeComponent"  v-on:property-change="onPropertyChange"></pager-controller>
+                <pager-controller :component="activeComponent" v-on:property-change="onPropertyChange"></pager-controller>
             </div>
             <setting-bar :component="activeComponent" v-on:property-change="onPropertyChange"></setting-bar>
             <toolbar v-on:create-component="onComponentCreate"></toolbar>
