@@ -26,7 +26,7 @@
                 <div class="setting-row">
                     <div class="setting-item col-2">
                         <label class="setting-item__label">背景:</label>
-                        <input class="setting-item__input" type="color" v-bind:value="activeComponent.style.backgroundColor" v-on:input="onSettingChange($event, 'style.backgroundColor')">
+                        <input class="setting-item__input" type="color" v-bind:value="activeComponent.style.backgroundColor" v-on:input="onSettingChange($event.target.value, 'style.backgroundColor')">
                         <i id="background-img-icon"></i>
                     </div>
                 </div>
@@ -45,18 +45,6 @@
 <script>
     import DragContainer from './drag-container.vue';
     import NumberInput from './number-input.vue';
-    // let getObjValueByKey = (object, key) => {
-    //     var keys = key.split('.');
-    //     var newValue = null;
-    //     for (let i = 0, l = keys.length; i < l; i++) {
-    //         if (newValue == null) {
-    //             newValue = object[keys[i]];
-    //         } else {
-    //             newValue = newValue[keys[i]];
-    //         }
-    //     }
-    //     return newValue;
-    // };
 
     export default {
         props: ['component'],
