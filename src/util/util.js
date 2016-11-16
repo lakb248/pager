@@ -1,3 +1,4 @@
+import CONST from './const.js';
 /**
  * justify if the object has change
  * @param  {Object} before the objcet before change
@@ -55,8 +56,15 @@ let createComonent = type => {
     style.height = 100;
     style.left = 120;
     style.top = 150;
-    style.backgroundColor = '#000000';
+    if (type === CONST.COMPONENT_TYPE.LABEL) {
+        component.text = 'Label';
+        style.color = '#000';
+        style.padding = '10px';
+        style.height = '40px';
+    }
+    style.backgroundColor = '#ffffff';
     component.style = style;
+    console.log(component);
     return component;
 };
 

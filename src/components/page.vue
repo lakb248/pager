@@ -22,7 +22,6 @@ export default {
     methods: {
         onComponentSelect(component) {
             // TODO: update pager controller
-            // this.onElementClick(component);
             this.$emit('select', component);
         }
     }

@@ -3,7 +3,7 @@
         <div class="toolbar-body">
             <div class="toolbar-content" v-on:click="onToolClick($event)">
                 <ul id="basic-components-list">
-                    <li id="text-component"></li>
+                    <li id="label-component"></li>
                     <li id="image-component"></li>
                     <li id="link-component"></li>
                 </ul>
@@ -65,7 +65,7 @@ export default {
         }
     }
 
-    #text-component {
+    #label-component {
         background-image: url('../asserts/text-icon.png');
 
         &:hover {

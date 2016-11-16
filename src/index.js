@@ -37,5 +37,4 @@ var Pager = new Vue({
     }
 });
 
-/* global document */
 Pager.$mount('#container');

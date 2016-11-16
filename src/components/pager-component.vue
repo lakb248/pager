@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="pager-component-container" v-bind:style="style" v-on:click="onComponentClick($event)">
-
+        {{component.text}}
     </div>
 </template>
 

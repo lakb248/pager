@@ -6,27 +6,37 @@
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label class="setting-item__label">宽:</label>
-                        <number-input class="setting-item__input" :number="activeComponent.style.width" v-bind:change="settingChangeCb('style.width')">
+                        <number-input class="setting-item__input"
+                            :number="activeComponent.style.width"
+                            v-bind:change="settingChangeCb('style.width')">
                     </div>
                     <div class="setting-item col-1">
                         <label class="setting-item__label">高:</label>
-                        <number-input class="setting-item__input" :number="activeComponent.style.height" v-bind:change="settingChangeCb('style.height')">
+                        <number-input class="setting-item__input"
+                            :number="activeComponent.style.height"
+                            v-bind:change="settingChangeCb('style.height')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-1">
                         <label class="setting-item__label">上:</label>
-                        <number-input class="setting-item__input" :number="activeComponent.style.top" v-bind:change="settingChangeCb('style.top')">
+                        <number-input class="setting-item__input"
+                            :number="activeComponent.style.top"
+                            v-bind:change="settingChangeCb('style.top')">
                     </div>
                     <div class="setting-item col-1">
                         <label class="setting-item__label">左:</label>
-                        <number-input class="setting-item__input" :number="activeComponent.style.left" v-bind:change="settingChangeCb('style.left')">
+                        <number-input class="setting-item__input"
+                            :number="activeComponent.style.left"
+                            v-bind:change="settingChangeCb('style.left')">
                     </div>
                 </div>
                 <div class="setting-row">
                     <div class="setting-item col-2">
                         <label class="setting-item__label">背景:</label>
-                        <input class="setting-item__input" type="color" v-bind:value="activeComponent.style.backgroundColor" v-on:input="onSettingChange($event.target.value, 'style.backgroundColor')">
+                        <input class="setting-item__input" type="color"
+                            v-bind:value="activeComponent.style.backgroundColor"
+                            v-on:input="onSettingChange($event.target.value, 'style.backgroundColor')">
                         <i id="background-img-icon"></i>
                     </div>
                 </div>

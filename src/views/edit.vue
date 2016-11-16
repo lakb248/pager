@@ -92,7 +92,7 @@
                 setObjValueByKey(this.activeComponent, keypath, value);
             },
             onComponentCreate(type) {
-                var element = Util.createComonent();
+                var element = Util.createComonent(type);
                 this.pager.components.push(element);
                 this.activeComponent = element;
             }
