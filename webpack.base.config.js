@@ -42,6 +42,12 @@ module.exports = {
         }
     },
     plugins: [
-        new ExtractTextPlugin('index.css')
+        new ExtractTextPlugin('index.css'),
+        new webpack.LoaderOptionsPlugin({
+            vue: {
+                postcss: [require('postcss-cssnext')({browsers: [
+                    '> 1%', 'last 5 Android versions', 'last 5 iOS versions']})]
+            }
+        })
     ]
 };
